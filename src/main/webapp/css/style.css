@@ -960,6 +960,22 @@ body::after {
     max-width: 860px;
 }
 
+.home-split-three {
+    max-width: 1200px;
+}
+
+.btn-ranking-home {
+    background: linear-gradient(135deg, #1a0a2e, #0d0620);
+    border-color: #9b59b6;
+    color: #ce93d8;
+}
+
+.btn-ranking-home:hover {
+    background: linear-gradient(135deg, #2d1554, #1a0a2e);
+    box-shadow: 0 0 20px rgba(155, 89, 182, 0.5);
+    color: #e1bee7;
+}
+
 .home-card {
     flex: 1;
     min-width: 280px;
@@ -1298,4 +1314,32 @@ body::after {
     max-width: 600px;
     width: 100%;
     margin-bottom: 30px;
+}
+
+/* Botão voltar home */
+.nav-topo {
+    position: fixed;
+    top: 16px;
+    left: 20px;
+    z-index: 100;
+}
+
+.btn-voltar-home {
+    display: inline-block;
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 6px 14px;
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.btn-voltar-home:hover {
+    color: var(--accent-bright);
+    border-color: var(--accent-bright);
+    box-shadow: 0 0 10px rgba(204, 0, 0, 0.3);
 }

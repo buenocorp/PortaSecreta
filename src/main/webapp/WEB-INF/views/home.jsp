@@ -28,7 +28,7 @@
                 </ul>
             </div>
 
-            <div class="home-split">
+            <div class="home-split home-split-three">
 
                 <!-- PROFESSOR CARD -->
                 <div class="home-card">
@@ -63,6 +63,23 @@
                         <div class="erro-msg"><%= erro %></div>
                         <% } %>
                         <button type="submit" class="btn-iniciar btn-full">&#9654; ENTRAR NO JOGO</button>
+                    </form>
+                </div>
+
+                <!-- RANKING CARD -->
+                <div class="home-card">
+                    <div class="home-card-titulo">&#9733; RANKING AO VIVO</div>
+                    <p class="home-card-desc">Digite o código da sala para ver o placar em tempo real</p>
+
+                    <form action="${pageContext.request.contextPath}/ranking" method="get" class="form-inicio">
+                        <div class="input-group">
+                            <input type="text" name="sala" class="input-nome"
+                                   placeholder="Código da sala (ex: K4J8MX)"
+                                   maxlength="6"
+                                   style="text-transform:uppercase; letter-spacing:4px; text-align:center;"
+                                   oninput="this.value=this.value.toUpperCase()">
+                        </div>
+                        <button type="submit" class="btn-iniciar btn-full btn-ranking-home">&#9733; VER RANKING</button>
                     </form>
                 </div>
 

@@ -27,6 +27,10 @@
 </head>
 <body>
 
+    <div class="nav-topo">
+        <a href="${pageContext.request.contextPath}/home" class="btn-voltar-home">&#8592; INÍCIO</a>
+    </div>
+
     <div class="container">
 
 <%
