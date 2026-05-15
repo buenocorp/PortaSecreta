@@ -16,7 +16,9 @@
     JogoSessao jogo = (JogoSessao) request.getAttribute("jogo");
     Boolean feedbackCorreto = (Boolean) request.getAttribute("feedbackCorreto");
     String feedbackRespostaCorreta = (String) request.getAttribute("feedbackRespostaCorreta");
+    Boolean jogoReiniciadoPorErros = (Boolean) request.getAttribute("jogoReiniciadoPorErros");
     boolean correto = Boolean.TRUE.equals(feedbackCorreto);
+    boolean reiniciado = Boolean.TRUE.equals(jogoReiniciadoPorErros);
     int fase = jogo.getFase();
     boolean jogoFinalizado = correto && fase > 50;
 %>
@@ -46,10 +48,18 @@
                 Excelente! Avance para a próxima fase!
                 <% } %>
             </p>
+            <% } else if (reiniciado) { %>
+            <div class="resultado-icone incorreto-icone">&#10007;</div>
+            <h2 class="resultado-titulo incorreto">3 ERROS!</h2>
+            <p class="resultado-msg incorreto-msg">Você errou 3 vezes nesta fase. O jogo foi reiniciado!</p>
+            <div class="resposta-correta-box">
+                <span class="resposta-correta-label">Resposta correta:</span>
+                <span class="resposta-correta-valor"><%= feedbackRespostaCorreta %></span>
+            </div>
             <% } else { %>
             <div class="resultado-icone incorreto-icone">&#10007;</div>
             <h2 class="resultado-titulo incorreto">INCORRETO!</h2>
-            <p class="resultado-msg incorreto-msg">Não desista! Tente novamente.</p>
+            <p class="resultado-msg incorreto-msg">Não desista! Uma nova pergunta foi carregada.</p>
             <div class="resposta-correta-box">
                 <span class="resposta-correta-label">Resposta correta:</span>
                 <span class="resposta-correta-valor"><%= feedbackRespostaCorreta %></span>
@@ -65,9 +75,13 @@
                 <a href="${pageContext.request.contextPath}/portas" class="btn-continuar">
                     &#9654; PRÓXIMA FASE
                 </a>
+                <% } else if (reiniciado) { %>
+                <a href="${pageContext.request.contextPath}/portas" class="btn-continuar btn-tentar">
+                    &#9654; RECOMEÇAR DO INÍCIO
+                </a>
                 <% } else { %>
                 <a href="${pageContext.request.contextPath}/pergunta" class="btn-continuar btn-tentar">
-                    &#9654; TENTAR NOVAMENTE
+                    &#9654; PRÓXIMA PERGUNTA
                 </a>
                 <% } %>
             </div>

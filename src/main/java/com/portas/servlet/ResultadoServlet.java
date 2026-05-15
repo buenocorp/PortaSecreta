@@ -28,6 +28,7 @@ public class ResultadoServlet extends HttpServlet {
 
         Boolean feedbackCorreto = (Boolean) session.getAttribute("feedbackCorreto");
         String feedbackRespostaCorreta = (String) session.getAttribute("feedbackRespostaCorreta");
+        Boolean jogoReiniciadoPorErros = (Boolean) session.getAttribute("jogoReiniciadoPorErros");
 
         if (feedbackCorreto == null) {
             // Direct access without going through question — redirect to portas
@@ -38,9 +39,11 @@ public class ResultadoServlet extends HttpServlet {
         // Remove feedback from session after reading
         session.removeAttribute("feedbackCorreto");
         session.removeAttribute("feedbackRespostaCorreta");
+        session.removeAttribute("jogoReiniciadoPorErros");
 
         req.setAttribute("feedbackCorreto", feedbackCorreto);
         req.setAttribute("feedbackRespostaCorreta", feedbackRespostaCorreta);
+        req.setAttribute("jogoReiniciadoPorErros", jogoReiniciadoPorErros);
         req.setAttribute("jogo", jogo);
 
         req.getRequestDispatcher("/WEB-INF/views/resultado.jsp").forward(req, resp);

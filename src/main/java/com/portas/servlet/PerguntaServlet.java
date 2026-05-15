@@ -1,5 +1,6 @@
 package com.portas.servlet;
 
+import com.portas.dao.PerguntaDAO;
 import com.portas.model.JogoSessao;
 import com.portas.model.Pergunta;
 import com.portas.model.TipoPergunta;
@@ -83,6 +84,20 @@ public class PerguntaServlet extends HttpServlet {
             jogo.marcarPerguntaUsada(pergunta.getId());
             jogo.incrementarFase();
             jogo.setPerguntaAtual(null);
+            jogo.resetarTentativas();
+        } else {
+            jogo.marcarPerguntaUsada(pergunta.getId());
+            jogo.incrementarTentativa();
+
+            if (jogo.getTentativasAtual() >= 3) {
+                jogo.resetarJogo();
+                session.setAttribute("jogoReiniciadoPorErros", true);
+            } else {
+                Pergunta novaPergunta = PerguntaDAO.getPerguntaAleatoria(
+                        pergunta.getTema(), jogo.getPerguntasUsadas());
+                jogo.setPerguntaAtual(novaPergunta);
+                session.setAttribute("jogoReiniciadoPorErros", false);
+            }
         }
 
         resp.sendRedirect(req.getContextPath() + "/resultado");

@@ -14,6 +14,7 @@ public class JogoSessao {
     private ArrayList<Integer> perguntasUsadas;
     private Pergunta perguntaAtual;
     private TipoTema[] temasPortas;
+    private int tentativasAtual;
 
     public JogoSessao(String nomeJogador, String codigoSala, long tempoInicio) {
         this.nomeJogador = nomeJogador;
@@ -33,6 +34,27 @@ public class JogoSessao {
 
     public void incrementarFase() {
         this.fase++;
+    }
+
+    public int getTentativasAtual() {
+        return tentativasAtual;
+    }
+
+    public void incrementarTentativa() {
+        this.tentativasAtual++;
+    }
+
+    public void resetarTentativas() {
+        this.tentativasAtual = 0;
+    }
+
+    public void resetarJogo() {
+        this.fase = 1;
+        this.tempoInicio = System.currentTimeMillis();
+        this.perguntasUsadas = new ArrayList<>();
+        this.perguntaAtual = null;
+        this.tentativasAtual = 0;
+        embaralharTemasPortas();
     }
 
     public void marcarPerguntaUsada(int id) {
