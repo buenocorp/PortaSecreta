@@ -64,7 +64,7 @@ public class PerguntaServlet extends HttpServlet {
         boolean correto;
         if (pergunta.getTipo() == TipoPergunta.SQL_LIVRE) {
             String respostaNorm = normalizarSQL(resposta);
-            String[] alternativas = pergunta.getRespostaCorreta().split(",");
+            String[] alternativas = pergunta.getRespostaCorreta().split("\\|");
             correto = false;
             for (String alt : alternativas) {
                 if (normalizarSQL(alt).equals(respostaNorm)) {
@@ -90,6 +90,6 @@ public class PerguntaServlet extends HttpServlet {
 
     private String normalizarSQL(String sql) {
         if (sql == null) return "";
-        return sql.trim().toUpperCase().replaceAll("\\s+", " ");
+        return sql.trim().toUpperCase().replaceAll("\\s+", " ").replaceAll(";\\s*$", "").trim();
     }
 }
